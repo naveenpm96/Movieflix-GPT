@@ -1,0 +1,11 @@
+export const fetchNowPlayingApiUrl =
+  "https://api.themoviedb.org/3/movie/now_playing";
+
+export const API_OPTIONS = {
+  method: "GET",
+  headers: {
+    accept: "application/json",
+    Authorization:
+      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NzE1OGE3YTRlNTQzZDNkNjFmZTIwMTUwMmY4MDJiMiIsInN1YiI6IjY2NDQ4NDI1YThmYWFhYWMxMDNkMzM0OCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.pcgZ6GTajqDwzp37Z4goWDxHLOCTKRTJT8aq57j_czc",
+  },
+};

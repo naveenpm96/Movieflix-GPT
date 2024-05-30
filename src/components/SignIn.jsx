@@ -1,20 +1,27 @@
 import React, { useRef, useState } from "react";
 import Header from "./Header";
-import { Link } from "react-router-dom";
-import { emailvalidator } from "../utils/SignInUpFormvalidation";
-import { passwordvalidator } from "../utils/SignInUpFormvalidation";
-import { FullnameValidator } from "../utils/SignInUpFormvalidation";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/ReduxStore/userSlice";
+import {
+  emailvalidator,
+  passwordvalidator,
+  FullnameValidator,
+  serverValidatorMessage,
+} from "../utils/SignInUpFormvalidation";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/Firebase";
 import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
 
 const SignIn = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [signInNow, setSignInNow] = useState(true);
-  console.log(signInNow, "signInNow");
   const [emailvalidationErrorMessage, setEmailValidationErrorMessage] =
     useState("");
   const [passwordvalidationErrorMessage, setPasswordValidationErrorMessage] =
@@ -22,6 +29,8 @@ const SignIn = () => {
   const [fullNamevalidationErrorMessage, setFullNameValidationErrorMessage] =
     useState("");
   const [passwordShow, setPasswordShow] = useState(false);
+  const [servervalidationErrorMessage, setServerValidationErrorMessage] =
+    useState("");
 
   const email = useRef(null);
   const password = useRef(null);
@@ -31,10 +40,10 @@ const SignIn = () => {
     setSignInNow(!signInNow);
     password.current.value = "";
     email.current.value = "";
-
     setEmailValidationErrorMessage("");
     setPasswordValidationErrorMessage("");
     setFullNameValidationErrorMessage("");
+    setServerValidationErrorMessage("");
   };
 
   const tooglePassword = () => {
@@ -53,30 +62,45 @@ const SignIn = () => {
     setPasswordValidationErrorMessage(passwordvalidatorResponse);
     setFullNameValidationErrorMessage(fullNamevalidatorResponse);
 
-    // if (
-    //   (setEmailValidationErrorMessage,
-    //   setPasswordValidationErrorMessage,
-    //   setFullNameValidationErrorMessage)
-    // )
-    //   return;
-    // // SignIn/SignUp Logic
-
-    if (!signInNow) {
+    // SignIn/SignUp Logic
+    if (
+      !signInNow &&
+      emailvalidationErrorMessage === null &&
+      fullNamevalidationErrorMessage === null &&
+      passwordvalidationErrorMessage === null
+    ) {
       createUserWithEmailAndPassword(
         auth,
         email.current.value,
         password.current.value
       )
         .then((userCredential) => {
-          // Signed up
           const user = userCredential.user;
-          console.log(user);
+          updateProfile(user, {
+            displayName: fullName.current.value,
+            photoURL: "https://example.com/jane-q-user/profile.jpg",
+          })
+            .then(() => {
+              const { displayName, photoURL } = auth.currentUser;
+              dispatch(
+                addUser({ displayname: displayName, photoURL: photoURL })
+              );
+              navigate("/browse");
+            })
+            .catch((error) => {
+              setServerValidationErrorMessage(error);
+            });
         })
         .catch((error) => {
-          const errorCode = error.code;
           const errorMessage = error.message;
+          const serverMessage = serverValidatorMessage(errorMessage);
+          setServerValidationErrorMessage(serverMessage);
         });
-    } else {
+    } else if (
+      emailvalidationErrorMessage === null &&
+      passwordvalidationErrorMessage === null &&
+      signInNow
+    ) {
       signInWithEmailAndPassword(
         auth,
         email.current.value,
@@ -85,13 +109,13 @@ const SignIn = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
+          navigate("/browse");
           console.log(user, "signed in successfully");
         })
         .catch((error) => {
-          const errorCode = error.code;
           const errorMessage = error.message;
-          console.log(errorCode, errorMessage, "failed");
-          alert(errorMessage + ", " + errorCode + " ", "failed");
+          const serverMessage = serverValidatorMessage(errorMessage);
+          setServerValidationErrorMessage(serverMessage);
         });
     }
   };
@@ -105,7 +129,7 @@ const SignIn = () => {
             'url("https://assets.nflxext.com/ffe/siteui/vlv3/9f46b569-aff7-4975-9b8e-3212e4637f16/453ba2a1-6138-4e3c-9a06-b66f9a2832e4/IN-en-20240415-popsignuptwoweeks-perspective_alpha_website_large.jpg"),linear-gradient(to right, rgba(255,255,255,0.5), rgba(0,0,0,0.5))',
         }}
       >
-        <div className="signin-form-wrapper bg-opacity-50 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 text-center">
+        <div className="signin-form-wrapper z-10 bg-opacity-50 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 text-center">
           <form
             onSubmit={(e) => e.preventDefault()}
             className="signin-from py-10 px-10 bg-[#000000db]"
@@ -113,6 +137,13 @@ const SignIn = () => {
             <h1 className="signin-form-tittle text-white leading-normal text-4xl font-bold text-left pb-5 pr-5">
               {!signInNow ? "Sign Up" : "Sign In"}
             </h1>
+            {servervalidationErrorMessage && (
+              <div className="servervalidationErrorMessage">
+                <p className="text-red-700 text-left font-semibold ">
+                  {servervalidationErrorMessage}
+                </p>
+              </div>
+            )}
             <div className="signin-form-field gap-5">
               {!signInNow && (
                 <div className="signin-fullname-cont  py-4">
@@ -196,7 +227,7 @@ const SignIn = () => {
             <div className="login-signup-now my-5  text-left">
               {
                 <p className="text-[#ffff]/[0.7]">
-                  {signInNow ? "New to Netflix?" : "Already a member?"}
+                  {signInNow ? "New to Metflix?" : "Already a member?"}
                   <span>
                     <Link
                       onClick={handleSignInNow}

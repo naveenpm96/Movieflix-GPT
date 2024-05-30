@@ -20,3 +20,18 @@ export const FullnameValidator = (fullName) => {
   if (!fullName) return "Please fill the required filed.";
   return null;
 };
+
+export const serverValidatorMessage = (errorMessage) => {
+  console.log(errorMessage);
+  if (errorMessage?.includes("(auth/invalid-email)")) {
+    return `Email is not valid.`;
+  } else if (errorMessage?.includes("(auth/missing-password)")) {
+    return `password is not valid.`;
+  } else if (errorMessage?.includes("(auth/email-already-in-use)")) {
+    return `Email is already registered`;
+  } else if (errorMessage?.includes("(auth/invalid-credential)")) {
+    return `Invalid Email or Password`;
+  } else {
+    return null;
+  }
+};

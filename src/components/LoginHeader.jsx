@@ -2,13 +2,27 @@ import React from "react";
 import img from "../Assets/language-svgrepo-com.svg";
 import logoimg from "../Assets/output.png";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { signOut } from "firebase/auth";
+import { auth } from "../utils/Firebase";
 
-const Header = () => {
+const LoginHeader = () => {
+  const navigate = useNavigate();
+  const handleSignout = () => {
+    signOut(auth)
+      .then(() => {
+        console.log("Sign-out successful");
+        navigate("/sign-in");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <>
-      <div className="header-nav absolute bg-gradient-to-b from-black w-full z-10">
+      <div className="header-nav  bg-gradient-to-b from-black w-full z-10">
         <div className="header-logo flex justify-between items-center px-48 py-3.5">
-          <Link to={"/"}>
+          <Link to={"/browse"}>
             <img className="w-150 h-20 " src={logoimg} alt="header-logo" />
           </Link>
 
@@ -30,10 +44,10 @@ const Header = () => {
                 <option value="hi">हिन्दी</option>
               </select>
             </div>
-            <div className="signin-link">
+            <div className="signout-link" onClick={handleSignout}>
               <Link to={"/sign-in"}>
                 <span className="text-white px-5 py-1.5 rounded-md bg-customRed hover:bg-red-900">
-                  Sign In
+                  Sign out
                 </span>
               </Link>
             </div>
@@ -45,4 +59,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default LoginHeader;
