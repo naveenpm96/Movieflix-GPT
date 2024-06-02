@@ -23,8 +23,8 @@ const HeroTittle = ({ title, overview }) => {
         </Link>
         <Link>
           <div className="info-btn play-btn px-7 py-2 text-white flex justify-center items-center gap-2 font-bold rounded bg-gray-500">
-            <CiCircleInfo className="w- " />
-            <span to={"/"}>More Info</span>
+            <CiCircleInfo className="more-info w-6 h-6" />
+            <span>More Info</span>
           </div>
         </Link>
       </div>

@@ -25,3 +25,16 @@
   text-shadow: 0 #e79c10, -1vmin -1vmin 0 #d53a33;
   padding-left: 15px;
 }
+.slick-slide > div {
+  margin: 0 10px;
+}
+.slick-prev {
+  left: 0px !important;
+  z-index: 10;
+}
+.slick-next {
+  right: 0px !important;
+}
+.mv-list:first-child {
+  margin: -180px;
+}

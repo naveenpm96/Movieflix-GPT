@@ -51,6 +51,7 @@ const SignIn = () => {
   };
 
   const handleSubmitForm = () => {
+    console.log("clicked");
     const emailvalidatorResponse = emailvalidator(email.current.value);
     const passwordvalidatorResponse = passwordvalidator(password.current.value);
     let fullNamevalidatorResponse;

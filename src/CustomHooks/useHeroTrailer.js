@@ -11,13 +11,11 @@ const useHeroTrailer = (id) => {
       API_OPTIONS
     );
     const dataResp = await data.json();
-    console.log(dataResp);
     const filteredTrailer = dataResp.results?.filter(
       (trailer) => trailer.type === "Trailer"
     );
 
     dispatch(addMoviesTrailer(filteredTrailer));
-   
   };
 
   useEffect(() => {

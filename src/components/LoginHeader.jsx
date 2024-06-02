@@ -18,12 +18,15 @@ const LoginHeader = () => {
         console.log(error);
       });
   };
+
+  const logoimg =
+    "https://image.tmdb.org/t/p/original/wwemzKWzjKYJFfCeiB57q3r4Bcm.svg";
   return (
     <>
       <div className="header-nav  bg-gradient-to-b from-black w-full z-10">
         <div className="header-logo flex justify-between items-center px-48 py-3.5">
           <Link to={"/browse"}>
-            <img className="w-150 h-20 " src={logoimg} alt="header-logo" />
+            <img className="w-32 h-20 " src={logoimg} alt="header-logo" />
           </Link>
 
           <div className="lt-wrapper flex justify-between items-center w-56">
