@@ -16,6 +16,6 @@ const useSliderList = () => {
 
   useEffect(() => {
     SliderMoviesList();
-  }, []);
+  }, [SliderMoviesList]);
 };
 export default useSliderList;
