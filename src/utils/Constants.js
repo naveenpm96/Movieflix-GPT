@@ -11,3 +11,8 @@ export const API_OPTIONS = {
 };
 
 export const SLIDER_IMG_URL = "https://image.tmdb.org/t/p/w500/";
+
+export const YOU_AI_API_KEY =
+  "e8a9b30b-9f35-43d7-bf9e-37c77f60ef79<__>1PQqfyETU8N2v5f4MJjHLSG5";
+  
+const projectIdYou = "project id : proj_8AzUaktvkrjy58n9lWYWhHKQ";

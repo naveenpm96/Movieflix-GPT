@@ -21,6 +21,11 @@ export const FullnameValidator = (fullName) => {
   return null;
 };
 
+export const searchValidator = (searchWord) => {
+  if (!searchWord) return "Please fill the required filed.";
+  return null;
+};
+
 export const serverValidatorMessage = (errorMessage) => {
   console.log(errorMessage);
   if (errorMessage?.includes("(auth/invalid-email)")) {

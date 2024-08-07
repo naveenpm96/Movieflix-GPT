@@ -1,21 +1,20 @@
 import { useSelector } from "react-redux";
 import MoviesList from "./MoviesList";
-import useSliderList from "../../../CustomHooks/useSliderMoviesList";
+import {
+  useSliderTrendingList,
+  useSliderPopularList,
+} from "../../../CustomHooks/useSliderMoviesList";
 
 const BrowsePageSecondary = () => {
-  useSliderList();
+  useSliderTrendingList();
+  useSliderPopularList();
   const nowTrending = useSelector((store) => store.sliderList?.trendingList);
-  console.log(nowTrending);
+  const nowPolpular = useSelector((store) => store.sliderList?.popularList);
 
   return (
-    <div className="mv-list absolute top-[750px] bg-custom-gradient w-full">
+    <div className="mv-list absolute top-[648px] bg-custom-gradient w-full">
       <MoviesList title={"Now Trending"} data={nowTrending} />
-      <MoviesList title={"Now Trending2"} data={nowTrending} />
-      <MoviesList title={"Now Trending3"} data={nowTrending} />
-      <MoviesList title={"Now Trending4"} data={nowTrending} />
-      <MoviesList title={"Now Trending5"} data={nowTrending} />
-      <MoviesList title={"Now Trending6"} data={nowTrending} />
-      <MoviesList title={"Now Trending7"} data={nowTrending} />
+      <MoviesList title={"Popular on Netflix"} data={nowPolpular} />
     </div>
   );
 };

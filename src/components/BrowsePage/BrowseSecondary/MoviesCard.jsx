@@ -10,7 +10,7 @@ const MoviesCard = ({ data, title }) => {
     infinite: true,
     speed: 500,
     slidesToShow: 7,
-    slidesToScroll: 6,
+    slidesToScroll: 7,
   };
   return (
     <div className="slider-dta w-full ">
@@ -26,6 +26,7 @@ const MoviesCard = ({ data, title }) => {
                     src={SLIDER_IMG_URL + ele.poster_path}
                     alt="slider"
                   />
+                  <h1>{ele.id}</h1>
                 </>
               );
             })}

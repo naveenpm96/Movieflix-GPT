@@ -148,10 +148,10 @@ const SignIn = () => {
             <div className="signin-form-field gap-5">
               {!signInNow && (
                 <div className="signin-fullname-cont  py-4">
-                  <input
+                <input
                     ref={fullName}
                     className="w-96 py-3 px-5 rounded bg-transparent border text-white"
-                    type="Full Name"
+                    type="text"
                     placeholder="Full Name"
                     maxLength={20}
                     name="fullName"
@@ -161,7 +161,7 @@ const SignIn = () => {
                   </p>
                 </div>
               )}
-              <div className="signin-email-cont  py-4">
+              <div className="signin-email-cont py-4">
                 <input
                   ref={email}
                   required=""

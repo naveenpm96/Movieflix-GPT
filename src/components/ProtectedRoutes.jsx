@@ -16,7 +16,8 @@ export const AuthRedirect = ({ isAuthenticated, children }) => {
 
 // Define ProtectedRoutes component
 const ProtectedRoutes = ({ isAuthenticated }) => {
-  return isAuthenticated ? <Outlet /> : <Navigate to="/" />;
+  const navigate = useNavigate();
+  return isAuthenticated ? <Outlet /> : navigate(0);
 };
 
 export default ProtectedRoutes;

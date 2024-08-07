@@ -69,6 +69,7 @@ import SignIn from "./SignIn";
 import { useDispatch } from "react-redux";
 import { addUser, removeUser } from "../utils/ReduxStore/userSlice";
 import ProtectedRoutes, { AuthRedirect } from "./ProtectedRoutes";
+import GptSearch from "./GPT-Search/GptSearch";
 
 const Body = () => {
   const dispatch = useDispatch();
@@ -112,6 +113,10 @@ const Body = () => {
         {
           path: "/browse",
           element: <Browse />,
+        },
+        {
+          path: "/gpt-search",
+          element: <GptSearch/>,
         },
       ],
     },

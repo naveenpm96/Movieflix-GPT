@@ -1,9 +1,12 @@
 import { API_OPTIONS } from "../utils/Constants";
 import { useDispatch } from "react-redux";
-import { addTrendingList } from "../utils/ReduxStore/trendingList";
+import {
+  addTrendingList,
+  addPopularList,
+} from "../utils/ReduxStore/trendingList";
 import { useEffect } from "react";
 
-const useSliderList = () => {
+export const useSliderTrendingList = () => {
   const dispatch = useDispatch();
   const SliderMoviesList = async () => {
     const fetchSliderList = await fetch(
@@ -18,4 +21,19 @@ const useSliderList = () => {
     SliderMoviesList();
   }, []);
 };
-export default useSliderList;
+
+export const useSliderPopularList = () => {
+  const dispatch = useDispatch();
+  const SliderMoviesPopularList = async () => {
+    const fetchSliderList = await fetch(
+      "https://api.themoviedb.org/3/movie/popular",
+      API_OPTIONS
+    );
+    const data = await fetchSliderList.json();
+    dispatch(addPopularList(data.results));
+  };
+
+  useEffect(() => {
+    SliderMoviesPopularList();
+  }, []);
+};
