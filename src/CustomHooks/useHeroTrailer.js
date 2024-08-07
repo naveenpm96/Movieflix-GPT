@@ -20,7 +20,7 @@ const useHeroTrailer = (id) => {
 
   useEffect(() => {
     fetchTailerVideo();
-  }, []);
+  }, [fetchTailerVideo]);
 };
 
 export default useHeroTrailer;
