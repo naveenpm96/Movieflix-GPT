@@ -17,12 +17,13 @@
     "react-router-dom": "^6.23.0",
     "react-scripts": "5.0.1",
     "react-slick": "^0.30.2",
+    "react-type-animation": "^3.2.0",
     "slick-carousel": "^1.8.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "CI=false react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

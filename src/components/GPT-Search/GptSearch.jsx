@@ -6,6 +6,7 @@ import { API_OPTIONS } from "../../utils/Constants";
 import { useDispatch } from "react-redux";
 import { addGptSearchResults } from "../../utils/ReduxStore/moviesSlice";
 import GptResults from "./GptResults";
+import { TypeAnimation } from "react-type-animation";
 
 const GptSearch = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ const GptSearch = () => {
 
   const gptSearchHandleCLick = () => {
     aiFunc();
+    gptSearch.current.value = null;
   };
 
   const fetchSearchAiResultsInDB = async (aiResults) => {
@@ -70,6 +72,28 @@ const GptSearch = () => {
     <div className="gpt-search-cont bg-[#141414] w-full h-full">
       <LoginHeader />
       <div className="gpt-search-inp  py-20 ">
+        <div className="gpt-greet text-center pb-16">
+          <TypeAnimation
+            sequence={[
+              // Same substring at the start will only be typed out once, initially
+              "Welcome to Movieflix, where our AI-powered search engine helps you find your favorite MOVIE",
+              1000, // wait 1s before replacing "Mice" with "Hamsters"
+              "Welcome to Movieflix, where our AI-powered search engine helps you find your favorite DRAMA",
+              1000,
+              "Welcome to Movieflix, where our AI-powered search engine helps you find your favorite TV SHOWS",
+              1000,
+            ]}
+            wrapper="h4"
+            speed={10}
+            style={{
+              fontSize: "1.5em",
+              display: "inline-block",
+              color: "white",
+            }}
+            repeat={Infinity}
+          />
+        </div>
+
         <form
           action=""
           onSubmit={(e) => e.preventDefault()}
