@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import LoginHeader from "../LoginHeader";
 import { useRef } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
@@ -9,6 +9,7 @@ import GptResults from "./GptResults";
 import { TypeAnimation } from "react-type-animation";
 
 const GptSearch = () => {
+  const [aiRes, setAiRes] = useState(true);
   const dispatch = useDispatch();
   const gptSearch = useRef(null);
   const genAI = new GoogleGenerativeAI(
@@ -62,6 +63,7 @@ const GptSearch = () => {
         });
       });
       dispatch(addGptSearchResults(results.slice(0, 20)));
+      setAiRes(false);
     } catch (error) {
       console.log(error);
       alert("Please retry, as of now my server is busy");
@@ -69,7 +71,11 @@ const GptSearch = () => {
   };
 
   return (
-    <div className="gpt-search-cont bg-[#141414] w-full h-full">
+    <div
+      className={`gpt-search-cont bg-[#141414] w-full ${
+        aiRes ? "h-screen" : "h-full"
+      }`}
+    >
       <LoginHeader />
       <div className="gpt-search-inp  py-20 ">
         <div className="gpt-greet text-center pb-16">

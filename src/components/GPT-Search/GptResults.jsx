@@ -11,10 +11,9 @@ const GptResults = () => {
           moviesSuggestion?.map(
             (res) =>
               res?.poster_path && (
-                <div className="gpt-res-cont ">
+                <div className="gpt-res-cont " key={res.id}>
                   <div className="gpt-resp ">
                     <img
-                      key={res.id}
                       className="w-56 h-72 rounded"
                       src={SLIDER_IMG_URL + res?.poster_path}
                       alt=""

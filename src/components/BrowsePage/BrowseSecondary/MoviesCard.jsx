@@ -14,23 +14,21 @@ const MoviesCard = ({ data, title }) => {
   };
   return (
     <div className="slider-dta w-full ">
-      <>
-        <Slider {...settings}>
-          {data &&
-            data.map((ele, i) => {
-              return (
-                <>
-                  <img
-                    className="rounded"
-                    key={i}
-                    src={SLIDER_IMG_URL + ele.poster_path}
-                    alt="slider"
-                  />
-                </>
-              );
-            })}
-        </Slider>
-      </>
+      <Slider {...settings}>
+        {data &&
+          data.map((ele, i) => {
+            return (
+              <>
+                <img
+                  className="rounded"
+                  key={i}
+                  src={SLIDER_IMG_URL + ele.poster_path}
+                  alt="slider"
+                />
+              </>
+            );
+          })}
+      </Slider>
     </div>
   );
 };
