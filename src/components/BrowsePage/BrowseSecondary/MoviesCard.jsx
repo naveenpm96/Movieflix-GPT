@@ -17,16 +17,15 @@ const MoviesCard = ({ data, title }) => {
       <>
         <Slider {...settings}>
           {data &&
-            data.map((ele) => {
+            data.map((ele, i) => {
               return (
                 <>
                   <img
                     className="rounded"
-                    key={ele.id}
+                    key={i}
                     src={SLIDER_IMG_URL + ele.poster_path}
                     alt="slider"
                   />
-                  <h1>{ele.id}</h1>
                 </>
               );
             })}

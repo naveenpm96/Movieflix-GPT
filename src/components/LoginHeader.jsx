@@ -1,6 +1,9 @@
 import React from "react";
-//import img from "../Assets/language-svgrepo-com.svg";
+
 import logoimg from "../Assets/output.png";
+
+import img from "../Assets/language-svgrepo-com.svg";
+
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";

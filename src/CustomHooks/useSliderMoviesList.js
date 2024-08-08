@@ -19,7 +19,7 @@ export const useSliderTrendingList = () => {
 
   useEffect(() => {
     SliderMoviesList();
-  }, []);
+  }, [SliderMoviesList]);
 };
 
 export const useSliderPopularList = () => {
