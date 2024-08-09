@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import {
   addTrendingList,
   addPopularList,
+  addTopRatedList,
 } from "../utils/ReduxStore/trendingList";
 import { useEffect } from "react";
 /* eslint-disable react-hooks/exhaustive-deps */
@@ -35,5 +36,22 @@ export const useSliderPopularList = () => {
 
   useEffect(() => {
     SliderMoviesPopularList();
+  }, []);
+};
+
+export const useTopRatedList = () => {
+  const dispatch = useDispatch();
+  const topRatedPopularList = async () => {
+    const fetchSliderList = await fetch(
+      "https://api.themoviedb.org/3/movie/top_rated",
+      API_OPTIONS
+    );
+    const data = await fetchSliderList.json();
+    console.log(data);
+    dispatch(addTopRatedList(data.results));
+  };
+
+  useEffect(() => {
+    topRatedPopularList();
   }, []);
 };

@@ -5,6 +5,7 @@ const TrendingList = createSlice({
   initialState: {
     trendingList: null,
     popularList: null,
+    topRatedList: null,
   },
   reducers: {
     addTrendingList: (state, action) => {
@@ -13,8 +14,12 @@ const TrendingList = createSlice({
     addPopularList: (state, action) => {
       state.popularList = action.payload;
     },
+    addTopRatedList: (state, action) => {
+      state.topRatedList = action.payload;
+    },
   },
 });
 
-export const { addTrendingList, addPopularList } = TrendingList.actions;
+export const { addTrendingList, addPopularList, addTopRatedList } =
+  TrendingList.actions;
 export default TrendingList.reducer;

@@ -4,6 +4,18 @@ import { FaPlay } from "react-icons/fa6";
 import { CiCircleInfo } from "react-icons/ci";
 
 const HeroTittle = ({ title, overview }) => {
+  function truncateText(text, length) {
+    console.log(text.length);
+    if (text.length > length) {
+      return text.slice(0, length) + "...";
+    } else {
+      return text;
+    }
+  }
+
+  const overViewText = truncateText(overview, 200);
+  console.log(overViewText, "overViewText");
+
   return (
     <div className="info-wrapper flex absolute flex-col top-80 left-0 w-4/12 pl-12   ">
       <div className="hero-tittle-wrapper mb-5">
@@ -12,7 +24,7 @@ const HeroTittle = ({ title, overview }) => {
         </h1>
       </div>
       <div className="hero-overview-wrapper text-white">
-        <p className="text-sm font-medium	">{overview}</p>
+        <p className="text-sm font-medium	">{overViewText}</p>
       </div>
       <div className="info-button-links flex gap-3 text-white py-5 ">
         <Link to={"/"}>
