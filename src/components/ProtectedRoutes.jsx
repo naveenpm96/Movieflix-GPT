@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Navigate, Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 // Define AuthRedirect component
 export const AuthRedirect = ({ isAuthenticated, children }) => {
