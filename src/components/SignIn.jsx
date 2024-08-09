@@ -50,8 +50,9 @@ const SignIn = () => {
     setPasswordShow(!passwordShow);
   };
 
-  const handleSubmitForm = () => {
-    console.log("clicked");
+  const handleRegisterForm = () => {
+    console.log("handleRegisterForm");
+
     const emailvalidatorResponse = emailvalidator(email.current.value);
     const passwordvalidatorResponse = passwordvalidator(password.current.value);
     let fullNamevalidatorResponse;
@@ -65,7 +66,6 @@ const SignIn = () => {
 
     // SignIn/SignUp Logic
     if (
-      !signInNow &&
       emailvalidationErrorMessage === null &&
       fullNamevalidationErrorMessage === null &&
       passwordvalidationErrorMessage === null
@@ -86,7 +86,8 @@ const SignIn = () => {
               dispatch(
                 addUser({ displayname: displayName, photoURL: photoURL })
               );
-              navigate("/browse");
+              // navigate("/browse");
+              setSignInNow(!signInNow);
             })
             .catch((error) => {
               setServerValidationErrorMessage(error);
@@ -97,7 +98,24 @@ const SignIn = () => {
           const serverMessage = serverValidatorMessage(errorMessage);
           setServerValidationErrorMessage(serverMessage);
         });
-    } else if (
+    }
+  };
+
+  const handleSubmitForm = () => {
+    console.log("handleSubmitForm");
+    const emailvalidatorResponse = emailvalidator(email.current.value);
+    const passwordvalidatorResponse = passwordvalidator(password.current.value);
+    // let fullNamevalidatorResponse;
+
+    // if (fullName.current !== null) {
+    //   fullNamevalidatorResponse = FullnameValidator(fullName.current.value);
+    // }
+    setEmailValidationErrorMessage(emailvalidatorResponse);
+    setPasswordValidationErrorMessage(passwordvalidatorResponse);
+    //setFullNameValidationErrorMessage(fullNamevalidatorResponse);
+
+    // SignIn/SignUp Logic
+    if (
       emailvalidationErrorMessage === null &&
       passwordvalidationErrorMessage === null &&
       signInNow
@@ -148,7 +166,7 @@ const SignIn = () => {
             <div className="signin-form-field gap-5">
               {!signInNow && (
                 <div className="signin-fullname-cont  py-4">
-                <input
+                  <input
                     ref={fullName}
                     className="w-96 py-3 px-5 rounded bg-transparent border text-white"
                     type="text"
@@ -197,13 +215,24 @@ const SignIn = () => {
                 </p>
               </div>
               <div className="signin-btn w-full py-4">
-                <button
-                  onClick={handleSubmitForm}
-                  className="text-white box-border px-6 py-3 bg-customRed rounded hover:bg-red-800 w-full"
-                  type="submit"
-                >
-                  Get started
-                </button>
+                {signInNow === true ? (
+                  <button
+                    onClick={handleSubmitForm}
+                    className="text-white box-border px-6 py-3 bg-customRed rounded hover:bg-red-800 w-full"
+                    type="submit"
+                  >
+                    Get started
+                  </button>
+                ) : (
+                  <button
+                    onClick={handleRegisterForm}
+                    className="text-white box-border px-6 py-3 bg-customRed rounded hover:bg-red-800 w-full"
+                    type="submit"
+                  >
+                    {" "}
+                    Get started Regsiter
+                  </button>
+                )}
               </div>
               <div className="password-reset-link">
                 <Link className="text-white" to={"/"}>
@@ -228,7 +257,7 @@ const SignIn = () => {
             <div className="login-signup-now my-5  text-left">
               {
                 <p className="text-[#ffff]/[0.7]">
-                  {signInNow ? "New to Metflix?" : "Already a member?"}
+                  {signInNow ? "New to Movieflix?" : "Already a member?"}
                   <span>
                     <Link
                       onClick={handleSignInNow}
