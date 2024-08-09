@@ -5,7 +5,7 @@ import {
   addPopularList,
 } from "../utils/ReduxStore/trendingList";
 import { useEffect } from "react";
-
+/* eslint-disable react-hooks/exhaustive-deps */
 export const useSliderTrendingList = () => {
   const dispatch = useDispatch();
   const SliderMoviesList = async () => {

@@ -2,7 +2,7 @@ import { API_OPTIONS } from "../utils/Constants";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { addNowPlayingMovies } from "../utils/ReduxStore/moviesSlice";
-
+/* eslint-disable react-hooks/exhaustive-deps */
 const useNowPlayingMovies = () => {
   const dispatch = useDispatch();
   const fetchNowPlayingApi = () => {
@@ -13,6 +13,6 @@ const useNowPlayingMovies = () => {
   };
   useEffect(() => {
     fetchNowPlayingApi();
-  }, []);
+  });
 };
 export default useNowPlayingMovies;

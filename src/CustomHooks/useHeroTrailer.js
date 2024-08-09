@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { API_OPTIONS } from "../utils/Constants";
 import { useDispatch } from "react-redux";
 import { addMoviesTrailer } from "../utils/ReduxStore/moviesSlice";
-
+/* eslint-disable react-hooks/exhaustive-deps */
 const useHeroTrailer = (id) => {
   const dispatch = useDispatch();
   const fetchTailerVideo = async () => {
