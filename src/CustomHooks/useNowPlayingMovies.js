@@ -13,6 +13,6 @@ const useNowPlayingMovies = () => {
   };
   useEffect(() => {
     fetchNowPlayingApi();
-  });
+  }, []);
 };
 export default useNowPlayingMovies;

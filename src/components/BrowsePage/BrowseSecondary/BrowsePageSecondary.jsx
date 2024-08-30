@@ -13,13 +13,12 @@ const BrowsePageSecondary = () => {
   const nowTrending = useSelector((store) => store.sliderList?.trendingList);
   const nowPolpular = useSelector((store) => store.sliderList?.popularList);
   const topRated = useSelector((store) => store.sliderList?.topRatedList);
-  console.log(topRated, "topRated");
 
   return (
-    <div className="mv-list absolute top-[648px] bg-custom-gradient w-full">
+    <div className="mv-list absolute top-[700px] bg-custom-gradient w-full">
       <MoviesList title={"Now Trending"} data={nowTrending} />
-      <MoviesList title={"Popular on Netflix"} data={nowPolpular} />
-      <MoviesList title={"Top Rated on Netflix"} data={topRated} />
+      <MoviesList title={"Popular on Movieflix"} data={nowPolpular} />
+      <MoviesList title={"Top Rated on Movieflix"} data={topRated} />
     </div>
   );
 };

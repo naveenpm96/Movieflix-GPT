@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { addUser, removeUser } from "../utils/ReduxStore/userSlice";
 import ProtectedRoutes, { AuthRedirect } from "./ProtectedRoutes";
 import GptSearch from "./GPT-Search/GptSearch";
+import DebounceSearch from "./Debounce-Search/DebounceSearch";
 
 const Body = () => {
   const dispatch = useDispatch();
@@ -56,6 +57,10 @@ const Body = () => {
         {
           path: "/gpt-search",
           element: <GptSearch />,
+        },
+        {
+          path: "/search",
+          element: <DebounceSearch />,
         },
       ],
     },

@@ -19,7 +19,8 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
+// eslint-disable-next-line
 const app = initializeApp(firebaseConfig);
-console.log(app);
+//console.log(app);
 // const analytics = getAnalytics(app);
 export const auth = getAuth();

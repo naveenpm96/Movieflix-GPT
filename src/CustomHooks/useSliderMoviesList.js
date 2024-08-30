@@ -47,7 +47,6 @@ export const useTopRatedList = () => {
       API_OPTIONS
     );
     const data = await fetchSliderList.json();
-    console.log(data);
     dispatch(addTopRatedList(data.results));
   };
 

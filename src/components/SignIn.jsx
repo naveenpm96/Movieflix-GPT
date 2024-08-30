@@ -17,6 +17,9 @@ import {
 import { auth } from "../utils/Firebase";
 import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
+import Example from "./TestComponents";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -103,6 +106,7 @@ const SignIn = () => {
 
   const handleSubmitForm = () => {
     console.log("handleSubmitForm");
+
     const emailvalidatorResponse = emailvalidator(email.current.value);
     const passwordvalidatorResponse = passwordvalidator(password.current.value);
     // let fullNamevalidatorResponse;
@@ -130,14 +134,21 @@ const SignIn = () => {
           const user = userCredential.user;
           navigate("/browse");
           console.log(user, "signed in successfully");
+          toast.success("Successfully signed in!", {
+            position: "top-center",
+          });
         })
         .catch((error) => {
           const errorMessage = error.message;
           const serverMessage = serverValidatorMessage(errorMessage);
           setServerValidationErrorMessage(serverMessage);
+          toast.error(serverMessage || "An error occurred!", {
+            position: "top-center",
+          });
         });
     }
   };
+
   return (
     <>
       <Header />
@@ -216,22 +227,27 @@ const SignIn = () => {
               </div>
               <div className="signin-btn w-full py-4">
                 {signInNow === true ? (
-                  <button
-                    onClick={handleSubmitForm}
-                    className="text-white box-border px-6 py-3 bg-customRed rounded hover:bg-red-800 w-full"
-                    type="submit"
-                  >
-                    Get started
-                  </button>
+                  <>
+                    <button
+                      onClick={handleSubmitForm}
+                      className="text-white box-border px-6 py-3 bg-customRed rounded hover:bg-red-800 w-full"
+                      type="submit"
+                    >
+                      Get started
+                    </button>
+                    <ToastContainer />
+                  </>
                 ) : (
-                  <button
-                    onClick={handleRegisterForm}
-                    className="text-white box-border px-6 py-3 bg-customRed rounded hover:bg-red-800 w-full"
-                    type="submit"
-                  >
-                    {" "}
-                    Get started Regsiter
-                  </button>
+                  <>
+                    <button
+                      onClick={handleRegisterForm}
+                      className="text-white box-border px-6 py-3 bg-customRed rounded hover:bg-red-800 w-full"
+                      type="submit"
+                    >
+                      Get started Regsiter
+                    </button>
+                    <ToastContainer />
+                  </>
                 )}
               </div>
               <div className="password-reset-link">
@@ -270,6 +286,7 @@ const SignIn = () => {
                 </p>
               }
             </div>
+            <Example />
           </form>
         </div>
       </div>

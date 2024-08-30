@@ -6,7 +6,7 @@ import { API_OPTIONS } from "../../utils/Constants";
 import { useDispatch } from "react-redux";
 import { addGptSearchResults } from "../../utils/ReduxStore/moviesSlice";
 import GptResults from "./GptResults";
-import { TypeAnimation } from "react-type-animation";
+import GptTypeAnimation from "./GptTypeAnimation";
 
 const GptSearch = () => {
   const [aiRes, setAiRes] = useState(true);
@@ -78,28 +78,7 @@ const GptSearch = () => {
     >
       <LoginHeader />
       <div className="gpt-search-inp  py-20 ">
-        <div className="gpt-greet text-center pb-16">
-          <TypeAnimation
-            sequence={[
-              // Same substring at the start will only be typed out once, initially
-              "Welcome to Movieflix, where our AI-powered search engine helps you find your favorite MOVIE",
-              1000, // wait 1s before replacing "Mice" with "Hamsters"
-              "Welcome to Movieflix, where our AI-powered search engine helps you find your favorite DRAMA",
-              1000,
-              "Welcome to Movieflix, where our AI-powered search engine helps you find your favorite TV SHOWS",
-              1000,
-            ]}
-            wrapper="h4"
-            speed={10}
-            style={{
-              fontSize: "1.5em",
-              display: "inline-block",
-              color: "white",
-            }}
-            repeat={Infinity}
-          />
-        </div>
-
+        <GptTypeAnimation />
         <form
           action=""
           onSubmit={(e) => e.preventDefault()}
@@ -112,9 +91,13 @@ const GptSearch = () => {
             placeholder="Discover your next favorite with AI recommendations..."
             name="gptSearch"
           />
-          <div className="search-btn bg-customRed px-16 py-3 rounded text-white ">
-            <button onClick={gptSearchHandleCLick}>Search Movies</button>
-          </div>
+
+          <button
+            className="search-btn bg-customRed px-16 py-3 rounded text-white "
+            onClick={gptSearchHandleCLick}
+          >
+            Search Movies
+          </button>
         </form>
       </div>
 

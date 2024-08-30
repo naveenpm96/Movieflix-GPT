@@ -5,7 +5,6 @@ import { CiCircleInfo } from "react-icons/ci";
 
 const HeroTittle = ({ title, overview }) => {
   function truncateText(text, length) {
-    console.log(text.length);
     if (text.length > length) {
       return text.slice(0, length) + "...";
     } else {
@@ -14,7 +13,6 @@ const HeroTittle = ({ title, overview }) => {
   }
 
   const overViewText = truncateText(overview, 200);
-  console.log(overViewText, "overViewText");
 
   return (
     <div className="info-wrapper flex absolute flex-col top-80 left-0 w-4/12 pl-12   ">
